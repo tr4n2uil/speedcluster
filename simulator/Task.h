@@ -9,16 +9,16 @@ class Task {
 	
 	protected :
 		int state;
-		const int YET_TO_BEGIN = 0;
-		const int EXECUTION_TIME = 1;
-		const int TRANSFER_TIME = 2;
-		const int COMPLETED = 3;
+		static const int YET_TO_BEGIN = 0;
+		static const int EXECUTION_TIME = 1;
+		static const int TRANSFER_TIME = 2;
+		static const int COMPLETED = 3;
 		long execticks;
 		long ticks;
 		
 	public :
 		Task() : id(0), attime(0), exectime(0), state(0), execticks(0), ticks(0) { }
-		Task(int inFrom, long inAttime, long inExectime);
+		Task(int inId, long inAttime, long inExectime);
 		int getId() { return id; }
 		long getAttime() { return attime; }
 		long getExectime() { return exectime; }

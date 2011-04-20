@@ -10,10 +10,10 @@ class Message {
 	
 	protected :
 		int state;
-		const int YET_TO_BEGIN = 0;
-		const int STARTUP_TIME = 1;
-		const int TRANSFER_TIME = 2;
-		const int COMPLETED = 3;
+		static const int YET_TO_BEGIN = 0;
+		static const int STARTUP_TIME = 1;
+		static const int TRANSFER_TIME = 2;
+		static const int COMPLETED = 3;
 		long ticks;
 		
 	public :
@@ -22,7 +22,7 @@ class Message {
 		int getFrom() { return from; }
 		int getTo() { return to; }
 		long getAttime() { return attime; }
-		long getFortime() { return fortime; }
+		long getSize() { return size; }
 		int getState() { return state; }
 		long getTicks() { return ticks; }
 		bool simulateTick();
