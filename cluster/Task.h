@@ -6,7 +6,7 @@
 class Task  : public SimUnit{
 	private :
 		long exectime;
-		bool clusteractive;
+		int clusterid;
 	
 	protected :
 		static const int EXECUTION_TIME = 2;
@@ -14,12 +14,15 @@ class Task  : public SimUnit{
 		long execticks;
 		
 	public :
-		Task() : SimUnit(), exectime(0), clusteractive(0), execticks(0) { }
-		Task(int inId, long inAttime, long inExectime, bool inClusteractive = false);
+		Task() : SimUnit(), exectime(0), clusterid(0), execticks(0) { }
+		Task(int inId, long inAttime, long inExectime, int inClusterid = 0);
 		long getExectime() { return exectime; }
 		long getExecticks() { return execticks; }
+		int getClusterId() { return clusterid; }
+		void setClusterId(int inId) { clusterid = inId; }
 		bool simulateTick();
 		bool nextState();
+		bool switchTransfer(long tfticks);
 		~Task() { }
 };
 

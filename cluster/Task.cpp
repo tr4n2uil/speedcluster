@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-Task::Task(int inId, long inAttime, long inExectime, bool inClusteractive) : SimUnit(inId, inAttime), exectime(inExectime), clusteractive(inClusteractive) { 
+Task::Task(int inId, long inAttime, long inExectime, int inClusterid) : SimUnit(inId, inAttime), exectime(inExectime), clusterid(inClusterid) { 
 }
 
 // no need
@@ -36,4 +36,11 @@ bool Task::nextState() {
 			return false;
 		}
 	}
+}
+
+bool Task::switchTransfer(long tfticks) {
+	execticks = ticks;
+	ticks = tfticks;
+	state = Task::TRANSFER_TIME;
+	return true;
 }

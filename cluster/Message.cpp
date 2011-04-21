@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-Message::Message(int inId, long inAttime, int inFrom, int inTo, long inSize)
-		: SimUnit(inId, inAttime), from(inFrom), to(inTo), size(inSize) { 
+Message::Message(int inId, long inAttime, int inFrom, int inTo, long inSize, Network *inNet)
+		: SimUnit(inId, inAttime), from(inFrom), to(inTo), size(inSize), net(inNet) { 
 }
 
 // no need
@@ -16,14 +16,18 @@ bool Message::nextState() {
 	switch(state){
 		case SimUnit::YET_TO_BEGIN :
 		{
-			// TODO set ticks
+			ticks = net->getStartupTime();
 			state = Message::STARTUP_TIME;
+			from->switchTransfer(ticks);
+			to->switchTransfer(ticks);
 			return true;
 		}
 		case Message::STARTUP_TIME :
 		{
-			// TODO set ticks
+			ticks = net->getTransferTime(size, ((from->getClusterId())==(to->getClusterId())));
 			state = Message::TRANSFER_TIME;
+			from->switchTransfer(ticks);
+			to->switchTransfer(ticks);
 			return true;
 		}
 		case Message::TRANSFER_TIME :

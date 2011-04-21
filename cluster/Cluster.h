@@ -2,6 +2,7 @@
 #define __CLUSTER_H__
 
 #include "../simulator/SimUnit.h"
+#include "Task.h"
 
 #include <vector>
 #include <algorithm>
@@ -9,7 +10,7 @@
 class Cluster : public SimUnit {
 	private :
 		long fortime;
-		std::vector<int> members;
+		std::vector<Task*> members;
 		
 	protected :
 		static const int ACTIVE_TIME = 2;
@@ -17,7 +18,7 @@ class Cluster : public SimUnit {
 	public :
 		Cluster() : SimUnit() { }
 		Cluster(int inId, long inAttime, long inFortime);
-		bool contains(int member) { return std::find(members.begin(), members.end(), member) != members.end(); }
+		bool contains(Task *member) { return std::find(members.begin(), members.end(), member) != members.end(); }
 		long getFortime() { return fortime; }
 		bool simulateTick();
 		bool nextState();
