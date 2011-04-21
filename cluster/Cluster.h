@@ -1,33 +1,26 @@
 #ifndef __CLUSTER_H__
 #define __CLUSTER_H__
 
+#include "../simulator/SimUnit.h"
+
 #include <vector>
 #include <algorithm>
 
-class Cluster {
+class Cluster : public SimUnit {
 	private :
-		int id;
-		long attime;
-		long exectime;
+		long fortime;
 		std::vector<int> members;
 		
 	protected :
-		int state;
-		static const int YET_TO_BEGIN = 0;
-		static const int EXECUTION_TIME = 1;
-		static const int COMPLETED = 2;
-		long ticks;
+		static const int ACTIVE_TIME = 2;
 		
 	public :
-		Cluster() : state(0), ticks(0) { }
-		Cluster(int inId, long inAttime, long inExectime);
+		Cluster() : SimUnit() { }
+		Cluster(int inId, long inAttime, long inFortime);
 		bool contains(int member) { return std::find(members.begin(), members.end(), member) != members.end(); }
-		int getId() { return id; }
-		long getAttime() { return attime; }
-		long getExectime() { return exectime; }
-		int getState() { return state; }
-		long getTicks() { return ticks; }
+		long getFortime() { return fortime; }
 		bool simulateTick();
+		bool nextState();
 		~Cluster() { }
 	
 };
