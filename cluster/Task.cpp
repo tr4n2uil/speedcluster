@@ -12,6 +12,7 @@ bool Task::simulateTick() {
 }
 
 bool Task::nextState() {
+	//cout << "Task "<<id<<" State Changed et: "<<execticks<<"\n";
 	switch(state){
 		case SimUnit::YET_TO_BEGIN :
 		{
@@ -39,7 +40,9 @@ bool Task::nextState() {
 }
 
 bool Task::switchTransfer(long tfticks) {
-	execticks = ticks;
+	//cout << "Task "<<id<<" State Transfer et:"<<ticks<<" t:"<<tfticks<<"\n";
+	if(state == Task::EXECUTION_TIME)
+		execticks = ticks;
 	ticks = tfticks;
 	state = Task::TRANSFER_TIME;
 	return true;

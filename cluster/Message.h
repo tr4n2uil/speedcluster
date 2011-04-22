@@ -12,7 +12,7 @@ class Message : public SimUnit {
 		long size;
 		Network *net;
 	
-	protected :
+	public :
 		static const int STARTUP_TIME = 2;
 		static const int TRANSFER_TIME = 3;
 		

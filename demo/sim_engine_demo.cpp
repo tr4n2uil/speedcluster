@@ -2,6 +2,7 @@
 #include "../cluster.h"
 
 #include <vector>
+#include <iomanip>
 #include <iostream>
 using namespace std;
 
@@ -55,10 +56,41 @@ int main(int argc, char *argv[]) {
 		eng.addUnit(tasks[i]);
 	
 	long 	ticks = 0;
-	while(eng.run()){
+	do {
+		cout << "TICK " << setw(7)<< ticks;
+		for(int i=0; i<tsknum; i++){
+			string str;
+			switch(tasks[i]->getState()){
+				case SimUnit::YET_TO_BEGIN :
+				{
+					str+="|";
+					break;
+				}
+				case Task::TRANSFER_TIME :
+				{
+					str+="N";
+					break;
+				}
+				case Task::EXECUTION_TIME :
+				{
+					str+="x";
+					break;
+				}
+				case SimUnit::COMPLETED :
+				default :
+				{
+					str+="|";
+				}
+			}
+			if(tasks[i]->getClusterId()!=0)
+				str+="C";
+			else
+				str+=" ";
+			cout<<setw(5)<<str;
+		}
+		cout<<endl;
 		ticks++;
-		cout << "TICK : " << ticks << endl;
-	}
+	}while(eng.run());
 	
 	return 0;
 }

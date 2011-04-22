@@ -9,9 +9,11 @@ class Task  : public SimUnit{
 		int clusterid;
 	
 	protected :
+		long execticks;
+	
+	public :
 		static const int EXECUTION_TIME = 2;
 		static const int TRANSFER_TIME = 3;
-		long execticks;
 		
 	public :
 		Task() : SimUnit(), exectime(0), clusterid(0), execticks(0) { }

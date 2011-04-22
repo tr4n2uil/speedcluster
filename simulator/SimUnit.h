@@ -9,6 +9,8 @@ class SimUnit {
 		long attime;
 		int state;
 		long ticks;
+	
+	public :
 		static const int YET_TO_BEGIN = 0;
 		static const int COMPLETED = 1;
 		

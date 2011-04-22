@@ -12,7 +12,7 @@ class Cluster : public SimUnit {
 		long fortime;
 		std::vector<Task*> members;
 		
-	protected :
+	public :
 		static const int ACTIVE_TIME = 2;
 		
 	public :

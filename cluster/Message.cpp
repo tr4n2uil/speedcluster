@@ -13,13 +13,14 @@ bool Message::simulateTick() {
 }
 
 bool Message::nextState() {
+	//cout << "Message "<<id<<" State Changed\n";
 	switch(state){
 		case SimUnit::YET_TO_BEGIN :
 		{
 			ticks = net->getStartupTime();
 			state = Message::STARTUP_TIME;
-			from->switchTransfer(ticks);
-			to->switchTransfer(ticks);
+			from->switchTransfer(ticks+1);
+			to->switchTransfer(ticks+1);
 			return true;
 		}
 		case Message::STARTUP_TIME :
@@ -29,8 +30,8 @@ bool Message::nextState() {
 			else
 				ticks = net->getTransferTime(size, ((from->getClusterId())==(to->getClusterId())));
 			state = Message::TRANSFER_TIME;
-			from->switchTransfer(ticks);
-			to->switchTransfer(ticks);
+			from->switchTransfer(ticks+1);
+			to->switchTransfer(ticks+1);
 			return true;
 		}
 		case Message::TRANSFER_TIME :
