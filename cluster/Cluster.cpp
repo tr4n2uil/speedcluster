@@ -18,14 +18,14 @@ bool Cluster::nextState() {
 			ticks = fortime;
 			state = Cluster::ACTIVE_TIME;
 			for(vector<Task*>::iterator p=members.begin(); p!=members.end(); p++)
-				p->setClusterId(id);
+				(*p)->setClusterId(id);
 			return true;
 		}
 		case Cluster::ACTIVE_TIME :
 		{
 			state = SimUnit::COMPLETED;
 			for(vector<Task*>::iterator p=members.begin(); p!=members.end(); p++)
-				p->setClusterId(0);
+				(*p)->setClusterId(0);
 			return true;
 		}
 		case SimUnit::COMPLETED :

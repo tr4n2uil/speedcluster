@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-Message::Message(int inId, long inAttime, int inFrom, int inTo, long inSize, Network *inNet)
+Message::Message(int inId, long inAttime, Task *inFrom, Task *inTo, long inSize, Network *inNet)
 		: SimUnit(inId, inAttime), from(inFrom), to(inTo), size(inSize), net(inNet) { 
 }
 
@@ -24,7 +24,10 @@ bool Message::nextState() {
 		}
 		case Message::STARTUP_TIME :
 		{
-			ticks = net->getTransferTime(size, ((from->getClusterId())==(to->getClusterId())));
+			if((from->getClusterId()) == 0 || (to->getClusterId()) == 0)
+				ticks = net->getTransferTime(size, false);
+			else
+				ticks = net->getTransferTime(size, ((from->getClusterId())==(to->getClusterId())));
 			state = Message::TRANSFER_TIME;
 			from->switchTransfer(ticks);
 			to->switchTransfer(ticks);

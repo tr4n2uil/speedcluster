@@ -20,6 +20,7 @@ class Cluster : public SimUnit {
 		Cluster(int inId, long inAttime, long inFortime);
 		bool contains(Task *member) { return std::find(members.begin(), members.end(), member) != members.end(); }
 		long getFortime() { return fortime; }
+		void addTask(Task *t) { members.push_back(t); }
 		bool simulateTick();
 		bool nextState();
 		~Cluster() { }

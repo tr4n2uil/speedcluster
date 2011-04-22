@@ -2,7 +2,7 @@
 #define __MESSAGE_H__
 
 #include "../simulator/SimUnit.h"
-#include "../speed/Network.h"
+#include "../simulator/Network.h"
 #include "Task.h"
 
 class Message : public SimUnit {
